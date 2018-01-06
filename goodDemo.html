@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>wTab组件</title>
+<style>
+*{
+	font-family: "微软雅黑";
+	font-size: 12px;
+}
+body {
+	background-color:#FFF;
+	margin-top:0;
+	margin-right:0;
+	margin-left:0;
+	margin-bottom:0;
+}
+.hidden{
+	display: none;
+}
+.tabPad{
+	padding: 20px;
+}
+
+/*##########wTab控件的样式#############*/
+.wTab {
+	font-size:14px;
+	background-image:url(imagesUI/tabs/subTabBG.png);
+	background-repeat:repeat-x;
+}
+.wTab ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.wTab .Tabs li {
+	position:relative;
+	bottom:-1px;
+	left:5px;
+	height:35px;
+	line-height:30px;
+	margin-left:5px;
+	text-align:center;
+	cursor:pointer;
+	overflow:hidden;
+	float:left;
+}
+.wTab .tab {
+	color:#000;
+	background-image:url(imagesUI/tabs/subTab-mid.png);
+	width:auto;
+	height:26px;
+	bottom:0;
+	background-repeat:repeat-x;
+	position:relative;
+	top:6px;
+	left:4px;
+}
+.wTab .tabH {/*带"H" 的表示是当前状态 */
+	border-bottom:0;
+	font-weight:bold;
+	color:#000;
+	background-image:url(imagesUI/tabs/subTabH-mid.png);
+	width:auto;
+	height:27px;
+	z-index:10;
+	background-repeat:repeat-x;
+	position:relative;
+	top:6px
+}
+.wTab .tabContent {
+	clear:both;
+	width:99.8%;
+	height:auto;
+	border:0;
+	z-index:11
+}
+.wTab .tabH .tabLeft {/*每个tab 头左侧的样式*/
+	border-bottom:0;
+	font-weight:bold;
+	color:#000;
+	background-image:url(imagesUI/tabs/subTabH-left.png);
+	width:8px;
+	height:27px;
+	z-index:10;
+	background-repeat:no-repeat;
+	position:relative;
+}
+.wTab .tabH .tabRight {/*每个tab 头左侧的样式*/
+	border-bottom:0;
+	font-weight:bold;
+	color:#000;
+	background-image:url(imagesUI/tabs/subTabH-right.png);
+	width:10px;
+	height:27px;
+	z-index:10;
+	background-repeat:no-repeat;
+	position:relative;
+}
+.wTab .tab .tabLeft {
+	border-bottom:0;
+	font-weight:bold;
+	color:#000;
+	background-image:url(imagesUI/tabs/subTab-left.png);
+	width:8px;
+	height:27px;
+	z-index:10;
+	background-repeat:no-repeat;
+	position:relative;
+}
+.wTab .tab .tabRight {
+	border-bottom:0;
+	font-weight:bold;
+	color:#000;
+	background-image:url(imagesUI/tabs/subTab-right.png);
+	width:10px;
+	height:27px;
+	z-index:10;
+	background-repeat:no-repeat;
+	position:relative;
+}
+/*###end###*/
+.a{
+	font-weight:bold; 
+	text-decoration:underline;
+	cursor:pointer;
+	color:#06F;
+}
+</style>
+
+</head>
+
+<body>
+
+<div>
+	<button id="btn_add1">add tab</button>
+	<button id="btn_add2">add tab</button>
+	<button id="btn_remove">close tab</button>
+</div>
+
+<div id="myTab">
+	<!--tab初始化到这里了-->
+</div>
+
+
+<div id="tab1" class="hidden">
+	<div class="tabPad">
+	This is your code.
+    </div>
+</div>
+<div id="tab2" class="hidden">
+	<div class="tabPad">
+		This is your code.
+		This is your code.<br/>
+		This is your code.
+    </div>
+</div>
+
+<div id="tab3" class="hidden">
+	<div class="tabPad">
+		内容
+    </div>
+</div>
+<div id="tab4" class="hidden"> 
+	<div class="tabPad">
+		JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。
+在1995年时，由Netscape公司的Brendan Eich，在网景导航者浏览器上首次设计实现而成。因为Netscape与Sun合作，Netscape管理层希望它外观看起来像Java，因此取名为JavaScript。但实际上它的语法风格与Self及Scheme较为接近。[1] 
+为了取得技术优势，微软推出了JScript，CEnvi推出ScriptEase，与JavaScript同样可在浏览器上运行。为了统一规格，因为JavaScript兼容于ECMA标准，因此也称为ECMAScript。
+    </div>
+</div>
+
+</body>
+</html>
+
+<script src="jquery-1.8.0.min.js"></script>
+<script src="wTab.js"></script>
+<script>
+
+var tab = new wTab();
+tab.addTab({
+	caption:"默认首页",
+	id:"tab3"
+});
+tab.addTab({
+	caption : "JavaScript简介",
+	id:"tab4",
+	isClose:true
+});
+tab.autoHeight=true;
+tab.isdivtab=true;
+
+tab.oncloseclick = function(index,tabObject){
+	console.log(tabObject);
+}
+tab.onclick=function(index,tabObject){
+	console.log("你单击了tab索引是（"+index+"）的标签页");
+};
+
+tab.initTab({
+	containerId : "myTab",
+	name : "myTab"
+});
+
+document.getElementById("btn_add1").onclick = function(){
+	tab.addNewTab({
+		caption : "new tab",
+		id : "tab1",
+		isClose : true
+	});
+};
+
+document.getElementById("btn_add2").onclick = function(){
+	tab.addNewTab({
+		caption : "new tab2",
+		id : "tab2",
+		isClose : true
+	});
+};
+
+document.getElementById("btn_remove").onclick = function(){
+	tab.closeTab({
+		caption : "new tab2",
+	});
+};
+</script>
+
